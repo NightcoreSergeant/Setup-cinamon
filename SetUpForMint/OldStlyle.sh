@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #to mint linux
 sudo apt-get update
 sudo apt-get install cinnamon-desktop-environment
@@ -8,7 +10,14 @@ sudo apt-get install cinnamon-desktop-environment
 #Clipt(when you mark auto copy)
 sudo apt-get install ClipIt -y
 
+#nylas mail
+wget https://edgehill.nylas.com/download?platform=linux-deb
+sudo dpkg -i 'download?platform=linux-deb'
+sudo apt-get install -f
+cp .nylas/config.cson ~/.nylas/
+
 #For better use
+sudo apt-get install python3 -y
 sudo apt-get install redshift -y
 sudo apt-get install atom -y
 sudo apt-get install ipython3 -y
@@ -16,8 +25,12 @@ sudo apt-get install htop -y
 sudo apt-get install plank -y
 sudo apt-get install pidgin -y
 sudo apt-get install tmux -y
-sudo apt-get -y install mpv
-
+sudo apt-get -y install mpv -y
+sudo apt-get install xclip -y
+#sudo apt-get -y install arp-scan -y #hacking tools
+sudo apt-get -y install 7z -y      #zip
+sudo apt-get -y install unzip -y   #unzip
+sudo apt-get -y install zip -y  #zip
 
 
 
@@ -29,12 +42,15 @@ sudo apt-get -y install mpv
   #	arc
   #icons
   #	numix-cricle
+gsettings set org.gnome.desktop.interface icon-theme 'numix-cricle'
   #controls
   #	flatabulous
+gsettings set org.gnome.desktop.interface control-theme 'MyIconTheme'
   #mouse pointer
   #	DMZ-White
   #desktop
   #	Android_Holo
+gsettings set org.gnome.desktop.wm.preferences theme "Android_Holo"
 .
 .
 .
@@ -63,6 +79,7 @@ cp -r .zshrc ~/
 #Bluethoot problems
 sudo rfkill block bluetooth
 sudo echo disable > /proc/acpi/ibm/bluetooth
+sudo systemctl disable bluetooth.service
 
 #git
 git config --global user.name "NightcoreSergeant"
@@ -104,6 +121,52 @@ cd /bin
 sudo mv nano nano_must_die
 sudo ln -s /usr/bin/vim nano
 sudo update-alternatives --install /usr/bin/editor editor /usr/bin/vim 1
+
+#vim with LUA
+sudo apt-get remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
+
+sudo apt-get build-dep vim-gnome
+
+sudo apt-get install liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
+
+sudo rm -rf /usr/local/share/vim
+
+sudo rm /usr/bin/vim
+
+sudo mkdir /usr/include/lua5.1/include
+sudo mv /usr/include/lua5.1/*.h /usr/include/lua5.1/include/
+
+sudo ln -s /usr/bin/luajit-2.0.0-beta9 /usr/bin/luajit
+
+cd ~/git
+git clone https://github.com/vim/vim --depth 1
+cd vim/src
+make distclean
+./configure --with-features=huge \
+            --enable-rubyinterp \
+            --enable-largefile \
+            --disable-netbeans \
+            --enable-pythoninterp \
+            --with-python-config-dir=/usr/lib/python2.7/config \
+            --enable-perlinterp \
+            --enable-luainterp \
+            --with-luajit \
+            --enable-gui=auto \
+            --enable-fail-if-missing \
+            --with-lua-prefix=/usr/include/lua5.1 \
+            --enable-cscope
+make
+sudo make install
+
+sudo ln -s /usr/local/bin/vim /usr/local/bin/vi
+sudo ln -s /usr/local/bin/vim /usr/bin/vi
+sudo ln -s /usr/local/bin/vim /usr/bin/vim
+
+
+#youtube player
+cd ~/git && git clone https://github.com/agiz/youtube-mpv --depth 1
+~/git/youtube-mpv/install-ubuntu.sh
+cd
 
 #OTHER SETTINGS(if not mention don't change anything)
  #background- off,no picture,none,black
