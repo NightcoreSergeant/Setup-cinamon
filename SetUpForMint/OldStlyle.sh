@@ -98,6 +98,11 @@ wget https://atom.io/download/deb
 sudo dpkg -i deb
 sudo apt-get install -f
 cp .atom/config.cson ~/.atom
+  #atom script
+cd ~/git/
+git clone https://github.com/rgbkrk/atom-script
+cd	#apm install script(in menubar Atom > Install Shell Commands)
+
 
 #pidgin plugins
 
