@@ -97,9 +97,9 @@ cd ~/git && git init
 sudo apt-get purge unity-scope-audacious unity-scope-chromiumbookmarks unity-scope-clementine unity-scope-colourlovers unity-scope-devhelp unity-scope-firefoxbookmarks unity-scope-gdrive unity-scope-gmusicbrowser unity-scope-gourmet unity-scope-manpages unity-scope-musique unity-scope-openclipart unity-scope-texdoc unity-scope-tomboy unity-scope-video-remote unity-scope-yelp unity-scope-zotero unity-lens-music unity-lens-photos unity-lens-video
 
 #skype
-wget http://download.skype.com/linux/skype-ubuntu-precise_4.3.0.37-1_i386.deb
-sudo dpkg -i skype-ubuntu-precise_4.3.0.37-1_i386.deb
-rm skype-ubuntu-precise_4.3.0.37-1_i386.deb
+#wget http://download.skype.com/linux/skype-ubuntu-precise_4.3.0.37-1_i386.deb
+#sudo dpkg -i skype-ubuntu-precise_4.3.0.37-1_i386.deb
+#rm skype-ubuntu-precise_4.3.0.37-1_i386.deb
 
 #atom
 cd ~/git && wget https://atom.io/download/deb
