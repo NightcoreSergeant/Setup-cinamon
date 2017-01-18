@@ -1,90 +1,93 @@
 #!/bin/bash
 
-me=`whoami`
-
-sudo apt-get -y install 7z       #zip
-sudo apt-get -y install unzip    #unzip
-sudo apt-get -y install zip   #zip
-#sudo apt-get -y install diodon   # clipboard  moved down
-sudo apt-get -y install git
-sudo apt-get -y install redshift # flux for linux
-sudo apt-get -y install xclip    # allows pipe to xclip
-sudo apt-get -y install gcp      # copy with progress
-sudo apt-get -y install zsh      # copy with progress
-#sudo apt-get -y install vim
-sudo apt-get -y install powerline
-sudo apt-get -y install arp-scan #hacking tools
-sudo apt-get -y install mpv      #video player
-sudo apt-get -y install tmux
-sudo apt-get -y install pidgin # chat
-sudo apt-get -y install ack-grep
-sudo apt-get -y install python3-pip
-sudo apt-get -y install ipython3
-sudo apt-get -y install shutter #screenshot manager + easy share / upload
-sudo apt-get -y install most #color man pages
-sudo apt-get -y install qbittorrent
-sudo apt-get -y install imagemagick
-sudo apt-get -y install gparted
-sudo apt-get -y install tuptime #control time, reboot ...
-sudo apt-get -y install tig # easy git log
-sudo apt-get -y install build-essentials # easy git log
-
-#neofetch - show system status
-sudo add-apt-repository ppa:dawidd0811/neofetch
+#to mint linux
 sudo apt-get update
-sudo apt-get -y install neofetch
+sudo apt-get install cinnamon-desktop-environment
 
-#clipboard manager
-sudo apt-get -y install glipper
+#zsh
+ sudo sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
+#Clipt(when you mark auto copy)
+sudo apt-get install ClipIt -y
+
+#nylas mail
+wget https://edgehill.nylas.com/download?platform=linux-deb
+sudo dpkg -i 'download?platform=linux-deb'
+sudo apt-get install -f
+cp .nylas/config.cson ~/.nylas/
+
+#For better use
+sudo apt-get install python3 -y
+sudo apt-get install redshift -y
+sudo apt-get install atom -y
+sudo apt-get install ipython3 -y
+sudo apt-get install htop -y
+sudo apt-get install plank -y
+sudo apt-get install pidgin -y
+sudo apt-get install tmux -y
+sudo apt-get -y install mpv -y
+sudo apt-get install xclip -y
+#sudo apt-get -y install arp-scan -y #hacking tools
+sudo apt-get -y install 7z -y      #zip
+sudo apt-get -y install unzip -y   #unzip
+sudo apt-get -y install zip -y  #zip
+
+
+
+#Themes
+  #window borders
+  	#arc
+git clone https://github.com/horst3180/arc-theme --depth 1 && cd arc-theme
+./autogen.sh --prefix=/usr
+sudo make install
+gsettings set org.gnome.metacity theme Arc
+  #icons
+  	#numix-cricle
+sudo apt-add-repository ppa:numix/ppa
+sudo apt-get update
+sudo apt-get install numix-icon-theme-circle
+gsettings set org.gnome.desktop.interface icon-theme 'numix-cricle'
+  #controls
+  	#flatabulous
+sudo add-apt-repository ppa:noobslab/themes
+sudo apt-get update
+sudo apt-get install flatabulous-theme
+gsettings set org.gnome.desktop.interface control-theme 'Flatabulous'
+  #mouse pointer
+  	#DMZ-White
+  #desktop
+  	#Android_Holo
+wget https://cinnamon-spices.linuxmint.com/uploads/themes/9296-RBPC-HAT0.zip
+unzip file.zip -d ~/.themes
+rm 9296-RBPC-HAT0.zip
+gsettings set org.gnome.desktop.wm.preferences theme "Android_Holo"
+
+
+#Configs for tmux zsh pidgin ssh.
+cd
+cd git
+git clown https://github.com/dcrystalj/dotfiles
+cp -r .config ~/
+cp -r .ssh ~/
+cp -r .purple ~/
+cp -r .tmux.conf ~/
+cp -r .zshrc ~/
+
+#Bluethoot problems
+sudo rfkill block bluetooth
+sudo echo disable > /proc/acpi/ibm/bluetooth
+sudo systemctl disable bluetooth.service
 
 #git
-mkdir ~/git
-git config --global user.name "dcrystalj"
-git config --global user.email "dcrystalj@gmail.com"
+cd ~/.ssh && ssh-keygen
+cat id_rsa.pub | xclip
+git config --global user.name "NightcoreSergeant"
+git config --global user.email "tomazic.tadej@gmail.com"
 git config --global push.default simple
+cd
 
-####DOCKER
-sudo usermod -aG docker `whoami`
-
-#oh-my-zsh
-sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-
-
-#remove ubuntu unnecessary lenses
+#To remove all not important stuff(unity)
 sudo apt-get purge unity-scope-audacious unity-scope-chromiumbookmarks unity-scope-clementine unity-scope-colourlovers unity-scope-devhelp unity-scope-firefoxbookmarks unity-scope-gdrive unity-scope-gmusicbrowser unity-scope-gourmet unity-scope-manpages unity-scope-musique unity-scope-openclipart unity-scope-texdoc unity-scope-tomboy unity-scope-video-remote unity-scope-yelp unity-scope-zotero unity-lens-music unity-lens-photos unity-lens-video
-
-
-#bing wallpaper
-cd ~/git && git clone https://github.com/dcrystalj/bing-wallpaper.git --depth 1
-./install.sh
-
-
-#powerline fonts
-#mkdir ~/git && cd ~/git && git clone https://github.com/powerline/fonts --depth 1
-#~/git/fonts/install.sh
-
-
-
-#spf13
-sudo apt-get install curl
-curl http://j.mp/spf13-vim3 -L -o - | sh
-echo "let g:airline_powerline_fonts=1" >> ~/.vimrc.before.local
-cd ~/git && git clone https://github.com/vim-airline/vim-airline-themes --depth 1
-cp -r ~/git/vim-airline-themes/* ~/.vim
-echo "let g:airline_theme='dark'" >> ~/.vimrc.local
-cp .vimrc.bundles.local ~/
-cp .vimrc.local ~/
-vim -c ':PluginInstall'
-
-
-#chromium
-cd ~/git && git clone https://github.com/scheib/chromium-latest-linux --depth 1
-~/git/chromium-latest-linux/update-and-run.sh
-
-#sublime
-cd ~/Downloads
-wget https://download.sublimetext.com/sublime-text_build-3103_amd64.deb
-sudo dpkg -i sublime-text_build-3103_amd64.deb
 
 #skype
 wget http://download.skype.com/linux/skype-ubuntu-precise_4.3.0.37-1_i386.deb
@@ -95,18 +98,15 @@ wget https://atom.io/download/deb
 sudo dpkg -i deb
 sudo apt-get install -f
 cp .atom/config.cson ~/.atom
+  #atom script
+cd ~/git/
+git clone https://github.com/rgbkrk/atom-script
+cd	#apm install script(in menubar Atom > Install Shell Commands)
 
-#nylas mail
-wget https://edgehill.nylas.com/download?platform=linux-deb
-sudo dpkg -i 'download?platform=linux-deb'
+#atom-beta
+wget https://atom.io/download/deb?channel=beta
+sudo dpkg -i deb\?channel=beta
 sudo apt-get install -f
-cp .nylas/config.cson ~/.nylas/
-
-
-#youtube player
-cd ~/git && git clone https://github.com/agiz/youtube-mpv --depth 1
-~/git/youtube-mpv/install-ubuntu.sh
-
 
 #pidgin plugins
 
@@ -125,24 +125,11 @@ cd ~/git && git clone https://github.com/agiz/youtube-mpv --depth 1
 	sudo apt-get update
 	sudo apt-get install -y purple-facebook
 
-
-#change capslock to ctrl
-sudo echo "@reboot setxkbmap -layout us -option ctrl:nocaps" | sudo tee -a /var/spool/cron/crontabs/root
-sudo echo "0 * * * * setxkbmap -layout us -option ctrl:nocaps" | sudo tee -a /var/spool/cron/crontabs/root
-
-
-#sensors
-sudo apt-get install -y lm-sensors
-yes | sudo sensors-detect
-yes | sudo service kmod start
-
-
-#gimp
-sudo apt-get install gimp
-#gimp THEME
-cd ~/git/
-git clone https://github.com/doctormo/GimpPs
-cp -r GimpPs/* ~/.gimp-2.8
+#destroy nano
+cd /bin
+sudo mv nano nano_must_die
+sudo ln -s /usr/bin/vim nano
+sudo update-alternatives --install /usr/bin/editor editor /usr/bin/vim 1
 
 #vim with LUA
 sudo apt-get remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
@@ -173,7 +160,7 @@ make distclean
             --enable-perlinterp \
             --enable-luainterp \
             --with-luajit \
-	    --enable-gui=auto \
+            --enable-gui=auto \
             --enable-fail-if-missing \
             --with-lua-prefix=/usr/include/lua5.1 \
             --enable-cscope
@@ -184,59 +171,27 @@ sudo ln -s /usr/local/bin/vim /usr/local/bin/vi
 sudo ln -s /usr/local/bin/vim /usr/bin/vi
 sudo ln -s /usr/local/bin/vim /usr/bin/vim
 
-#destroy nano
-cd /bin
-sudo mv nano nano_must_die
-sudo ln -s /usr/bin/vim nano
-sudo update-alternatives --install /usr/bin/editor editor /usr/bin/vim 1
 
-#FILE EXPLORER
-sudo apt-get install nemo-compare nemo-dropbox nemo-media-columns nemo-pastebin nemo-seahorse nemo-share nemo-emblems nemo-image-converter nemo-audio-tab
-sudo apt-get install nemo-terminal
-#preview
-sudo add-apt-repository ppa:nilarimogard/webupd8
-sudo apt-get update
-sudo apt-get install gloobus-preview
-sudo apt-get install unoconv gnumeric
-sudo apt-get install nemo-gloobus-sushi
-nemo -q
-#install nemo file manager instead of nautilus
-sudo add-apt-repository ppa:webupd8team/nemo
-sudo apt-get update
-sudo apt-get install nemo nemo-fileroller
+#youtube player
+cd ~/git && git clone https://github.com/agiz/youtube-mpv --depth 1
+~/git/youtube-mpv/install-ubuntu.sh
+cd
 
-#desktop nemo
-gsettings set org.gnome.desktop.background show-desktop-icons false
-#default nemo
-xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
+#OTHER SETTINGS(if not mention don't change anything)
+ #background- off,no picture,none,black
 
-#fix search in nautilus
-gsettings set org.gnome.nautilus.preferences enable-interactive-search false
+ #themes- mention in 24line
 
+ #accessibility- all off
 
-#all configs
-cp -r .config ~/
-cp -r .ssh ~/
-cp -r .purple ~/
-cp -r .tmux.conf ~/
-cp -r .zshrc ~/
+ #desktop- dektop
+  #icons(all off),
+  #allow icons from missing monitors to be displayed on the existing ones(ON)
 
+ #extensions- cinamon maximus
+wget https://cinnamon-spices.linuxmint.com/uploads/extensions/SPMS-GHT1-9M8U.zip
+unzip SPMS-GHT1-9M8U.zip -d ~/.local/share/cinnamon/extensions/
+sudo mv -f ~git/SetUpForMint/settings-shema.jason ~/.local/share/cinnamon/extensions/
 
-#move luncher to bottom
-#sudo gsettings set com.canonical.Unity.Launcher launcher-position Bottom
-
-#disable non-usefull services
-sudo systemctl disable bluetooth.service
-
-#fix touchpad on lenovo yoga 2 pro
-sudo cp 50-synaptics.conf /usr/share/X11/xorg.conf.d/50-synaptics.conf
-
-
-#safety for accident removal with rm -rf
-touch ~/-@
-sudo touch /-@
-sudo touch /root/-@
-
-
-#HOME FOLDER
-mkdir ~/torrents
+#THE END
+sudo reboot
