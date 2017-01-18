@@ -61,7 +61,10 @@ wget https://cinnamon-spices.linuxmint.com/uploads/themes/9296-RBPC-HAT0.zip
 unzip file.zip -d ~/.themes
 rm 9296-RBPC-HAT0.zip
 gsettings set org.gnome.desktop.wm.preferences theme "Android_Holo"
-
+  #background
+  gsettings set org.gnome.desktop.background primary-color "#000000"
+gsettings set org.gnome.desktop.background secondary-color "#000000"
+gsettings set org.gnome.desktop.background color-shading-type "solid"
 
 #Configs for tmux zsh pidgin ssh.
 cd
