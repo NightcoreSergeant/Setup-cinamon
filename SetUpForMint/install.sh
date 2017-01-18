@@ -1,6 +1,7 @@
 #!/bin/bash
 
-mkdir git
+
+cd && mkdir git
 
 #to mint linux
 sudo apt-get update
@@ -90,7 +91,7 @@ cat id_rsa.pub | xclip
 git config --global user.name "NightcoreSergeant"
 git config --global user.email "tomazic.tadej@gmail.com"
 git config --global push.default simple
-cd
+cd ~/git && git init
 
 #To remove all not important stuff(unity)
 sudo apt-get purge unity-scope-audacious unity-scope-chromiumbookmarks unity-scope-clementine unity-scope-colourlovers unity-scope-devhelp unity-scope-firefoxbookmarks unity-scope-gdrive unity-scope-gmusicbrowser unity-scope-gourmet unity-scope-manpages unity-scope-musique unity-scope-openclipart unity-scope-texdoc unity-scope-tomboy unity-scope-video-remote unity-scope-yelp unity-scope-zotero unity-lens-music unity-lens-photos unity-lens-video
@@ -98,6 +99,7 @@ sudo apt-get purge unity-scope-audacious unity-scope-chromiumbookmarks unity-sco
 #skype
 wget http://download.skype.com/linux/skype-ubuntu-precise_4.3.0.37-1_i386.deb
 sudo dpkg -i skype-ubuntu-precise_4.3.0.37-1_i386.deb
+rm skype-ubuntu-precise_4.3.0.37-1_i386.deb
 
 #atom
 cd ~/git && wget https://atom.io/download/deb
@@ -107,7 +109,11 @@ cp .atom/config.cson ~/.atom
   #atom script
 cd ~/git/
 git clone https://github.com/rgbkrk/atom-script
-cd	#apm install script(in menubar Atom > Install Shell Commands)
+cd atom-script
+apm link
+apm install script #(in menubar Atom > Install Shell Commands)
+apm install
+cd
 
 #atom-beta
 cd ~/git && wget https://atom.io/download/deb?channel=beta
@@ -198,7 +204,8 @@ cd
  #extensions- cinamon maximus
 cd ~/git && wget https://cinnamon-spices.linuxmint.com/uploads/extensions/SPMS-GHT1-9M8U.zip
 unzip SPMS-GHT1-9M8U.zip -d ~/.local/share/cinnamon/extensions/
-sudo mv -f ~git/SetUpForMint/settings-shema.jason ~/.local/share/cinnamon/extensions/
+sudo rm SPMS-GHT1-9M8U.zip
+sudo mv -f ~/git/SetUpForMint/settings-shema.jason ~/.local/share/cinnamon/extensions/
 cd
 #THE END
 sudo reboot
