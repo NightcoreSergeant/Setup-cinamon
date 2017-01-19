@@ -84,6 +84,8 @@ cat id_rsa.pub | xclip
 git config --global user.name "NightcoreSergeant"
 git config --global user.email "tomazic.tadej@gmail.com"
 git config --global push.default simple
+sudo chown -R $USER:$USER "$(git rev-parse --show-toplevel)/.git" #problems to pull()
+sudo chown -R $(id -u):$(id -g) "$(git rev-parse --show-toplevel)/.git" #problems to pull(illegal group name)
 cd
 
 #To remove all not important stuff(unity)
