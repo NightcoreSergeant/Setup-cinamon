@@ -91,8 +91,10 @@ cat id_rsa.pub | xclip
 git config --global user.name "NightcoreSergeant"
 git config --global user.email "tomazic.tadej@gmail.com"
 git config --global push.default simple
+sudo chown -R $USER:$USER "$(git rev-parse --show-toplevel)/.git" #problems to pull()
+sudo chown -R $(id -u):$(id -g) "$(git rev-parse --show-toplevel)/.git" #problems to pull(illegal group name)
 cd ~/git && git init
-
+cd
 #To remove all not important stuff(unity)
 sudo apt-get purge unity-scope-audacious unity-scope-chromiumbookmarks unity-scope-clementine unity-scope-colourlovers unity-scope-devhelp unity-scope-firefoxbookmarks unity-scope-gdrive unity-scope-gmusicbrowser unity-scope-gourmet unity-scope-manpages unity-scope-musique unity-scope-openclipart unity-scope-texdoc unity-scope-tomboy unity-scope-video-remote unity-scope-yelp unity-scope-zotero unity-lens-music unity-lens-photos unity-lens-video
 
@@ -106,6 +108,8 @@ cd ~/git && wget https://atom.io/download/deb
 sudo dpkg -i deb
 sudo apt-get install -f
 cp .atom/config.cson ~/.atom
+rm ~/git/deb
+
   #atom script
 cd ~/git/
 git clone https://github.com/rgbkrk/atom-script
@@ -119,6 +123,7 @@ cd
 cd ~/git && wget https://atom.io/download/deb?channel=beta
 sudo dpkg -i deb\?channel=beta
 sudo apt-get install -f
+rm deb\?channel=beta
 cd
 
 #pidgin plugins
@@ -207,5 +212,6 @@ unzip SPMS-GHT1-9M8U.zip -d ~/.local/share/cinnamon/extensions/
 sudo rm SPMS-GHT1-9M8U.zip
 sudo mv -f ~/git/SetUpForMint/settings-shema.jason ~/.local/share/cinnamon/extensions/
 cd
+
 #THE END
 sudo reboot
