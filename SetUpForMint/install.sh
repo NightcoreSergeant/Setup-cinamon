@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+cd && mkdir git
+
 #to mint linux
 sudo apt-get update
 sudo apt-get install cinnamon-desktop-environment
@@ -31,16 +34,18 @@ sudo apt-get install xclip -y
 sudo apt-get -y install 7z -y      #zip
 sudo apt-get -y install unzip -y   #unzip
 sudo apt-get -y install zip -y  #zip
-
+sudo apt-get install python3-setuptools #for pip
+sudo easy_install3 pip #for pip
 
 
 #Themes
   #window borders
   	#arc
-git clone https://github.com/horst3180/arc-theme --depth 1 && cd arc-theme
+cd ~/git && git clone https://github.com/horst3180/arc-theme --depth 1 && cd arc-theme
 ./autogen.sh --prefix=/usr
 sudo make install
 gsettings set org.gnome.metacity theme Arc
+cd  
   #icons
   	#numix-cricle
 sudo apt-add-repository ppa:numix/ppa
@@ -57,15 +62,18 @@ gsettings set org.gnome.desktop.interface control-theme 'Flatabulous'
   	#DMZ-White
   #desktop
   	#Android_Holo
-wget https://cinnamon-spices.linuxmint.com/uploads/themes/9296-RBPC-HAT0.zip
+cd ~/git && wget https://cinnamon-spices.linuxmint.com/uploads/themes/9296-RBPC-HAT0.zip
 unzip file.zip -d ~/.themes
 rm 9296-RBPC-HAT0.zip
 gsettings set org.gnome.desktop.wm.preferences theme "Android_Holo"
-
+cd
+#background
+  gsettings set org.gnome.desktop.background primary-color "#000000"
+gsettings set org.gnome.desktop.background secondary-color "#000000"
+gsettings set org.gnome.desktop.background color-shading-type "solid"
 
 #Configs for tmux zsh pidgin ssh.
-cd
-cd git
+cd ~/git
 git clown https://github.com/dcrystalj/dotfiles
 cp -r .config ~/
 cp -r .ssh ~/
@@ -86,29 +94,38 @@ git config --global user.email "tomazic.tadej@gmail.com"
 git config --global push.default simple
 sudo chown -R $USER:$USER "$(git rev-parse --show-toplevel)/.git" #problems to pull()
 sudo chown -R $(id -u):$(id -g) "$(git rev-parse --show-toplevel)/.git" #problems to pull(illegal group name)
+cd ~/git && git init
 cd
-
 #To remove all not important stuff(unity)
 sudo apt-get purge unity-scope-audacious unity-scope-chromiumbookmarks unity-scope-clementine unity-scope-colourlovers unity-scope-devhelp unity-scope-firefoxbookmarks unity-scope-gdrive unity-scope-gmusicbrowser unity-scope-gourmet unity-scope-manpages unity-scope-musique unity-scope-openclipart unity-scope-texdoc unity-scope-tomboy unity-scope-video-remote unity-scope-yelp unity-scope-zotero unity-lens-music unity-lens-photos unity-lens-video
 
 #skype
-wget http://download.skype.com/linux/skype-ubuntu-precise_4.3.0.37-1_i386.deb
-sudo dpkg -i skype-ubuntu-precise_4.3.0.37-1_i386.deb
+#wget http://download.skype.com/linux/skype-ubuntu-precise_4.3.0.37-1_i386.deb
+#sudo dpkg -i skype-ubuntu-precise_4.3.0.37-1_i386.deb
+#rm skype-ubuntu-precise_4.3.0.37-1_i386.deb
 
 #atom
-wget https://atom.io/download/deb
+cd ~/git && wget https://atom.io/download/deb
 sudo dpkg -i deb
 sudo apt-get install -f
 cp .atom/config.cson ~/.atom
+rm ~/git/deb
+
   #atom script
 cd ~/git/
 git clone https://github.com/rgbkrk/atom-script
-cd	#apm install script(in menubar Atom > Install Shell Commands)
+cd atom-script
+apm link
+apm install script #(in menubar Atom > Install Shell Commands)
+apm install
+cd
 
 #atom-beta
-wget https://atom.io/download/deb?channel=beta
+cd ~/git && wget https://atom.io/download/deb?channel=beta
 sudo dpkg -i deb\?channel=beta
 sudo apt-get install -f
+rm deb\?channel=beta
+cd
 
 #pidgin plugins
 
@@ -191,9 +208,11 @@ cd
   #allow icons from missing monitors to be displayed on the existing ones(ON)
 
  #extensions- cinamon maximus
-wget https://cinnamon-spices.linuxmint.com/uploads/extensions/SPMS-GHT1-9M8U.zip
+cd ~/git && wget https://cinnamon-spices.linuxmint.com/uploads/extensions/SPMS-GHT1-9M8U.zip
 unzip SPMS-GHT1-9M8U.zip -d ~/.local/share/cinnamon/extensions/
-sudo mv -f ~git/SetUpForMint/settings-shema.jason ~/.local/share/cinnamon/extensions/
+sudo rm SPMS-GHT1-9M8U.zip
+sudo mv -f ~/git/SetUpForMint/settings-shema.jason ~/.local/share/cinnamon/extensions/
+cd
 
 #THE END
 sudo reboot
