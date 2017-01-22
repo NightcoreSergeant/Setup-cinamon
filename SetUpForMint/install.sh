@@ -72,6 +72,10 @@ cd
 gsettings set org.gnome.desktop.background secondary-color "#000000"
 gsettings set org.gnome.desktop.background color-shading-type "solid"
 
+#bing wallpaper
+cd ~/git && git clone https://github.com/dcrystalj/bing-wallpaper.git --depth 1
+sh ./install.sh
+
 #Configs for tmux zsh pidgin ssh.
 cd ~/git
 git clown https://github.com/dcrystalj/dotfiles
@@ -193,7 +197,7 @@ sudo ln -s /usr/local/bin/vim /usr/bin/vim
 
 #youtube player
 cd ~/git && git clone https://github.com/agiz/youtube-mpv --depth 1
-sudo sh ~/git/youtube-mpv/install-ubuntu.sh
+./git/youtube-mpv/install-ubuntu.sh
 cd
 
 #OTHER SETTINGS(if not mention don't change anything)
