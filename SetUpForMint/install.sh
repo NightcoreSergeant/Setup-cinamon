@@ -36,7 +36,7 @@ sudo apt-get -y install unzip -y   #unzip
 sudo apt-get -y install zip -y  #zip
 sudo apt-get install python3-setuptools #for pip
 sudo easy_install3 pip #for pip
-
+sudo pip install --upgrade pip
 
 #Themes
   #window borders
@@ -193,7 +193,7 @@ sudo ln -s /usr/local/bin/vim /usr/bin/vim
 
 #youtube player
 cd ~/git && git clone https://github.com/agiz/youtube-mpv --depth 1
-~/git/youtube-mpv/install-ubuntu.sh
+sudo sh ~/git/youtube-mpv/install-ubuntu.sh
 cd
 
 #OTHER SETTINGS(if not mention don't change anything)
