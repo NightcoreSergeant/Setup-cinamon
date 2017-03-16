@@ -4,19 +4,19 @@
 cd && mkdir git
 
 #to mint linux
-sudo apt-get update
-sudo apt-get install cinnamon-desktop-environment
+sudo apt-get update -y
+sudo apt-get install cinnamon-desktop-environment -y
 
 #zsh
- sudo sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+ sudo sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)" -y
 
 #Clipt(when you mark auto copy)
 sudo apt-get install ClipIt -y
 
 #nylas mail
 wget https://edgehill.nylas.com/download?platform=linux-deb
-sudo dpkg -i 'download?platform=linux-deb'
-sudo apt-get install -f
+sudo dpkg -i 'download?platform=linux-deb' -y
+sudo apt-get install -f -y
 cp .nylas/config.cson ~/.nylas/
 
 #For better use
@@ -34,28 +34,28 @@ sudo apt-get install xclip -y
 sudo apt-get -y install 7z -y      #zip
 sudo apt-get -y install unzip -y   #unzip
 sudo apt-get -y install zip -y  #zip
-sudo apt-get install python3-setuptools #for pip
-sudo easy_install3 pip #for pip
-sudo pip install --upgrade pip
+sudo apt-get install python3-setuptools -y #for pip
+sudo easy_install3 pip -y #for pip 
+sudo pip install --upgrade pip -y
 
 #Themes
   #window borders
   	#arc
 cd ~/git && git clone https://github.com/horst3180/arc-theme --depth 1 && cd arc-theme
-./autogen.sh --prefix=/usr
-sudo make install
-gsettings set org.gnome.metacity theme Arc
+./autogen.sh --prefix=/usr -y
+sudo make install -y
+gsettings set org.gnome.metacity theme Arc -y
 cd  
   #icons
   	#numix-cricle
 sudo apt-add-repository ppa:numix/ppa
-sudo apt-get update
+sudo apt-get update -y
 sudo apt-get install numix-icon-theme-circle
 gsettings set org.gnome.desktop.interface icon-theme 'numix-cricle'
   #controls
   	#flatabulous
 sudo add-apt-repository ppa:noobslab/themes
-sudo apt-get update
+sudo apt-get update -y
 sudo apt-get install flatabulous-theme
 gsettings set org.gnome.desktop.interface control-theme 'Flatabulous'
   #mouse pointer
@@ -74,7 +74,7 @@ gsettings set org.gnome.desktop.background color-shading-type "solid"
 
 #bing wallpaper
 cd ~/git && git clone https://github.com/dcrystalj/bing-wallpaper.git --depth 1
-sh ./install.sh
+sh ./install.sh -y
 
 #Configs for tmux zsh pidgin ssh.
 cd ~/git
@@ -119,15 +119,15 @@ rm ~/git/deb
 cd ~/git/
 git clone https://github.com/rgbkrk/atom-script
 cd atom-script
-apm link
-apm install script #(in menubar Atom > Install Shell Commands)
-apm install
+apm link -y
+apm install script -y #(in menubar Atom > Install Shell Commands)
+apm install -y
 cd
 
 #atom-beta
 cd ~/git && wget https://atom.io/download/deb?channel=beta
-sudo dpkg -i deb\?channel=beta
-sudo apt-get install -f
+sudo dpkg -i deb\?channel=beta -y
+sudo apt-get install -f -y
 rm deb\?channel=beta
 cd
 
@@ -152,14 +152,14 @@ cd
 cd /bin
 sudo mv nano nano_must_die
 sudo ln -s /usr/bin/vim nano
-sudo update-alternatives --install /usr/bin/editor editor /usr/bin/vim 1
+sudo update-alternatives --install /usr/bin/editor editor /usr/bin/vim 1 -y
 
 #vim with LUA
-sudo apt-get remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common
+sudo apt-get remove --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common -y
 
-sudo apt-get build-dep vim-gnome
+sudo apt-get build-dep vim-gnome -y
 
-sudo apt-get install liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
+sudo apt-get install liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev -y
 
 sudo rm -rf /usr/local/share/vim
 
