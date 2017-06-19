@@ -79,6 +79,7 @@ sh ./install.sh -y
 #Configs for tmux zsh pidgin ssh.
 cd ~/git
 git clone https://github.com/dcrystalj/dotfiles
+cd dotfiles
 cp -r .config ~/
 cp -r .ssh ~/
 cp -r .purple ~/
